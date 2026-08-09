@@ -1,0 +1,46 @@
+query PickupPointsInArea(
+  $sessionId: ID!
+  $filters: PickupPointFilterInput
+  $sortBy: PickupPointSortInput
+  $first: Int!
+  $page: Int
+) {
+  session(id: $sessionId) {
+    pickupPoint {
+      pickupPoints(filters: $filters, sortBy: $sortBy) {
+        points(first: $first, page: $page) {
+          paginatorInfo {
+            lastPage
+          }
+          data {
+            id
+            name
+            type
+            location {
+              latitude
+              longitude
+            }
+            address {
+              city
+              postalCode
+              addressLine1
+              addressLine2
+            }
+            openingHours {
+              day
+              start {
+                hour
+                minute
+              }
+              end {
+                hour
+                minute
+              }
+            }
+            isOpenTwentyFourSeven
+          }
+        }
+      }
+    }
+  }
+}
